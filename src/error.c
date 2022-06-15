@@ -1,6 +1,6 @@
 #include "../include/cub3d.h"
 
-void	error_different(char *err)
+void	its_error(char *err)
 {
 	printf("%s\n", err);
 	printf("Error\n");

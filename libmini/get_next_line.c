@@ -1,135 +1,72 @@
 #include "libft.h"
 
-
-static size_t	ft_strlen_gnl(const char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-static	char	*gnl_push_to_line(char *mass)
-{
-	int		i;
-	char	*dest;
-
-	if (mass == NULL)
-		return (0);
-	i = 0;
-	while (mass[i] != '\n' && mass[i])
-		i++;
-	dest = (char *) malloc(sizeof (char) * (i + 1));
-	if (!dest)
-		return (0);
-	i = 0;
-	while (mass[i] != '\n' && mass[i] != '\0')
-	{
-		dest[i] = mass[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-static	int	gnl_strchr(const char *s, int c)
+char	*check_reminder(char **reminder, char **line)
 {
 	char	*mass;
-	int		i;
 
-	if (!s)
-		return (0);
-	mass = (char *)s;
-	i = 0;
-	while (mass[i] != '\0')
+	mass = NULL;
+	if (*reminder)
 	{
-		if (mass[i] == (char)c)
-			return (1);
-		i++;
+		mass = ft_strchr(*reminder, '\n');
+		if (mass)
+		{
+			*mass = '\0';
+			*line = ft_strdup(*reminder);
+			ft_strcpy(*reminder, ++mass);
+			return (mass);
+		}
+		else
+		{
+			*line = ft_strdup(*reminder);
+			free(*reminder);
+			*reminder = NULL;
+		}
 	}
-	return (0);
-}
-
-static	char	*gnl_strjoin(const char *s1, const char *s2)
-{
-	char	*mass;
-	size_t	i;
-	size_t	nb;
-	size_t	lens1;
-	size_t	lens2;
-
-	i = 0;
-	nb = 0;
-	lens1 = ft_strlen_gnl(s1);
-	lens2 = ft_strlen_gnl(s2);
-	mass = (char *) malloc((lens1 + lens1 + 1) * sizeof (char));
-	if (mass == NULL)
-		return (NULL);
-	while (nb < lens1)
-	{
-		mass[nb] = s1[nb];
-		nb++;
-	}
-	while (i < lens2)
-		mass[nb++] = s2[i++];
-	mass[nb] = '\0';
+	else
+		*line = ft_strdup("");
 	return (mass);
 }
 
-static	char	*gnl_update_re(char *mass)
+int	check_rules(char **buf, int fd, char **line)
 {
-	char	*dast;
-	int		i;
-	int		nb;
+	if (!line || BUFF_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (-1);
+	*buf = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (!buf)
+		return (-1);
+	return (1);
+}
 
-	i = 0;
-	nb = 0;
-	while (mass[i] != '\n' && mass[i] != '\0')
-		i++;
-	if (mass[i] == '\0')
-	{
-		free(mass);
-		return (0);
-	}
-	dast = (char *) malloc(sizeof (char) * (ft_strlen_gnl(mass) - i) + 1);
-	if (!dast)
-		return (0);
-	i++;
-	while (mass[i] != '\0')
-		dast[nb++] = mass[i++];
-	dast[nb] = '\0';
-	free(mass);
-	return (dast);
+void	get_tmp_chr(char **ptr_chr, char **reminder)
+{
+	**ptr_chr = '\0';
+	(*ptr_chr)++;
+	*reminder = ft_strdup(*ptr_chr);
 }
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*remainder;
-	char		*last;
-	char		buf[BUFF_SIZE + 1];
-	int			bwr;
+	static char	*reminder;
+	int			rb;
+	char		*buf;
+	char		*ptr_chr;
+	char		*tmp;
 
-	bwr = 1;
-	if ((!line || fd < 0 || read(fd, 0, 0) < 0) || BUFF_SIZE <= 0)
+	rb = check_rules(&buf, fd, line);
+	if (rb < 0)
 		return (-1);
-	while (!gnl_strchr(remainder, '\n') && bwr)
+	ptr_chr = check_reminder(&reminder, line);
+	while (!ptr_chr && rb > 0)
 	{
-		bwr = read(fd, buf, BUFF_SIZE);
-		buf[bwr] = '\0';
-		last = remainder;
-		remainder = gnl_strjoin(remainder, buf);
-		if (!remainder)
-			return (-1);
-		if (last != NULL)
-			free(last);
+		rb = read(fd, buf, BUFF_SIZE);
+		buf[rb] = '\0';
+		ptr_chr = ft_strchr(buf, '\n');
+		if (ptr_chr)
+			get_tmp_chr(&ptr_chr, &reminder);
+		tmp = *line;
+		*line = ft_strjoin(*line, buf);
+		free(tmp);
 	}
-	*line = gnl_push_to_line(remainder);
-	remainder = gnl_update_re(remainder);
-	if (bwr == 0)
-		return (0);
-	return (1);
+	free(buf);
+	return (rb && reminder);
 }

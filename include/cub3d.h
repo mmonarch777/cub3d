@@ -28,8 +28,10 @@ typedef struct 	s_cub
 	t_player	player;
 }				t_cub;
 
-void	error_different(char *err);
+void	parsing_file(char *file, t_cub *cub);
+void	its_error(char *err);
 void	parsing_map(t_cub *cub, char *line);
 int		parsing_color(t_cub *cub, char *line);
+void	check_map(t_cub *cub);
 
 #endif

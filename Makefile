@@ -1,7 +1,9 @@
 NAME 		= cub3D
-#----------------------------------------------------------------
-SRC 		=	src/cub.c		src/error.c		src/parsing.c		src/parsing_map.c
-#----------------------------------------------------------------
+#----------------------------------------------------------------------------
+SRC 		=	src/cub.c				src/error.c				src/parsing.c\
+				src/parsing_map.c		src/parsing_color.c			src/check_map.c\
+
+#----------------------------------------------------------------------------
 OBJ 		= $(SRC:.c=.o)
 #----------------------------------------------------------------
 HEADER 		= include/cub3d.h
@@ -21,7 +23,7 @@ FRAMEWORK	= -framework OpenGL -framework AppKit
 all			:$(NAME)
 #----------------------------------------------------------------
 $(NAME)		:$(OBJ) $(HEADER) $(LIB) $(MLX)
-			$(CC) $(OBJ) $(LIB) $(MLX) $(FREMEWORK) -o $(NAME)
+			$(CC) $(OBJ) $(LIB) $(MLX) $(FRAMEWORK) -o $(NAME)
 #----------------------------------------------------------------
 %.o 		: %.c $(LIB) $(HEADER) $(MLX)
 			$(CC) $(FLAGS) -Iinclude -c $< -o $@

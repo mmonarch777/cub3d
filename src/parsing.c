@@ -17,7 +17,7 @@ int	parsing_texture(t_cub	*cub, char *line)
 			num = 3;
 		cub->date->texture_path[num] = ft_strdup(line + 3);
 		if (cub->date->texture_path[num] == NULL || ft_strlen(cub->date->texture_path[num]) == 0)
-			error_different("Invalid texture path");
+			its_error("Invalid texture path");
 		return (1);
 	}
 	return (0);
@@ -31,7 +31,7 @@ int	add_map(t_cub *cub, char *line)
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	if (line[i] != '1')
-		error_different("Invalid argument");
+		its_error("Invalid argument");
 	else
 		parsing_map(cub, line);
 	return (1);
@@ -51,11 +51,12 @@ void	parsing_line(t_cub *cub, char *line)
 			while (line[i] == ' ' || line[i] == '\t')
 				i++;
 			if (parsing_texture(cub, line + i))
-				break ;
+				break;
 			else if (parsing_color(cub, line + i))
-				break ;
+				break;
 			else if (add_map(cub, line))
-				break ;
+				break;
+		}
 	}
 }
 
@@ -67,7 +68,7 @@ void	parsing_file(char *file, t_cub *cub)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		error_different("Invalid fd");
+		its_error("Invalid fd");
 	cub->date->color_ceil = -1;
 	cub->date->color_floor = -1;
 	cub->date->map = NULL;
@@ -75,10 +76,15 @@ void	parsing_file(char *file, t_cub *cub)
 	ret = 1;
 	while (ret != 0)
 	{
+		line = NULL;
 		ret = get_next_line(fd, &line);
+		printf("%s\n", line);
 		if (ret == -1)
-			error_different("File error\n");
+			its_error("Invalid file\n");
 		parsing_line(cub, line);
 		free(line);
 	}
+	close(fd);
+	if (cub->date->map == NULL)
+		its_error("Invalid file\n");
 }

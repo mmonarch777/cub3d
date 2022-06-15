@@ -10,13 +10,13 @@ void	parsing_map(t_cub *cub, char *line)
 	{
 		while (cub->date->map[i])
 			i++;
-		mass = (char **)malloc(sizeof(char *) * i + 2);
+		mass = (char **)malloc(sizeof(char *) * (i + 2));
 		if (!mass)
-			error_different("Error malloc map");
+			its_error("Error malloc map");
 		mass[i + 1] = NULL;
 		mass[i] = ft_strdup(line);
 		if (!mass[i])
-			error_different("Error malloc map");
+			its_error("Error malloc map");
 		while (i-- > 0)
 			mass[i] = cub->date->map[i];
 		free(cub->date->map);

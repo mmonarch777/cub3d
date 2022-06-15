@@ -21,11 +21,11 @@ int	get_number(char *line, int *i)
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	if (!ft_isdigit(line[*i]) || (line[*i] == '0' && ft_isdigit(line[*i + 1])))
-		error_different("Invalid color");
+		its_error("Invalid color");
 	number = mini_putnbr(line + *i, i);
 	if (number > 255)
-		error_different("Invalid color");
-	while (line[*i] == ' ' || line[*i] == '\t')
+		its_error("Invalid color");
+	while ((line[*i] == ' ' || line[*i] == '\t') && line[*i] != '\0')
 		(*i)++;
 	if (line[*i] == ',')
 		++(*i);
@@ -40,7 +40,7 @@ int	get_color(char *line)
 	int	count;
 
 	i = 0;
-	count = 3;
+	count = 4;
 	r_g_b = 0;
 	while (--count)
 	{
@@ -48,8 +48,7 @@ int	get_color(char *line)
 		r_g_b = (r_g_b << 8) + number;
 	}
 	if (line[i] != '\0')
-		error_different("Invalid color");
-	free(line);
+		its_error("Invalid color");
 	return (r_g_b);
 }
 
