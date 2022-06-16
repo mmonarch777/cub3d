@@ -16,5 +16,6 @@ int	main(int arc, char **arv)
 	cub->date->rotetion = 1;
 	parsing_file(arv[1], cub);
 	check_map(cub);
+	make_by_lodev(cub->date, cub->player);
 	return (0);
 }

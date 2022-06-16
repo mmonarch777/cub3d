@@ -1,7 +1,8 @@
 NAME 		= cub3D
 #----------------------------------------------------------------------------
 SRC 		=	src/cub.c				src/error.c				src/parsing.c\
-				src/parsing_map.c		src/parsing_color.c			src/check_map.c\
+				src/parsing_map.c		src/parsing_color.c		src/check_map.c\
+				src/raycasting_start.c
 
 #----------------------------------------------------------------------------
 OBJ 		= $(SRC:.c=.o)
