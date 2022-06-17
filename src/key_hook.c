@@ -50,10 +50,10 @@ int	key(int key, t_data *data)
 		step_right(data);
 	if (key == 0)
 		step_left(data);
-	if (key == 124)
-		turn_right(data);
 	if (key == 123)
 		turn_left(data);
+	if (key == 124)
+		turn_right(data);
 	if (key == 53)
 		exit(0);
 	return (0);

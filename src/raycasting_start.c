@@ -52,14 +52,14 @@ void	get_img(t_data *data, int *image, char *path, t_img *img)
 	img->pixel_bits = 4;
 	img->line_bytes = img->width;
 	img->endian = 0;
-	img->date = (int *) mlx_get_data_addr(img->image, &img->pixel_bits,
+	img->data = (int *) mlx_get_data_addr(img->image, &img->pixel_bits,
 			 &img->line_bytes, &img->endian);
 	y = -1;
 	while (++y < img->height)
 	{
 		x = -1;
 		while (++x < img->width)
-			image[img->width * y + x] = img->date[img->width * y + x];
+			image[img->width * y + x] = img->data[img->width * y + x];
 	}
 	mlx_destroy_image(data->mlx, img->image);
 }
@@ -71,7 +71,7 @@ void	get_image(t_data *data)
 
 	i = -1;
 	while (++i < 4)
-		get_img(data, data->texture[0], data->texture_path[0], &img);
+		get_img(data, data->texture[i], data->texture_path[i], &img);
 
 }
 
@@ -87,18 +87,18 @@ int	make_by_lodev(t_data *data, t_player player)
 	i = -1;
 	while (++i < 4)
 	{
-		data->texture[i] = malloc(sizeof (int ) * (TEXHEIGHT * TEXWIDTH));
+		data->texture[i] = (int *)malloc(sizeof(int) * (TEXHEIGHT * TEXWIDTH));
 		if (data->texture[i] == NULL)
 			its_error("Malloc error");
 	}
 	get_image(data);
 	data->win = mlx_new_window(data->mlx, WINWIDTH, WINHEIGHT, "cub3D");
 	data->img.image = mlx_new_image(data->mlx, WINWIDTH, WINHEIGHT);
-	data->img.date = (int *) mlx_get_data_addr(data->img.image,
+	data->img.data = (int *) mlx_get_data_addr(data->img.image,
 			&data->img.pixel_bits, &data->img.line_bytes, &data->img.height);
-	mlx_hook(data->window, 2, 0, key, data);
-	mlx_hook(data->window, 17, 0, close_window, data);
 	mlx_loop_hook(data->mlx, &raycaster, data);
+	mlx_hook(data->win, 2, 0, key, data);
+	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_loop(data->mlx);
 	return (0);
 }

@@ -12,8 +12,8 @@ int	main(int arc, char **arv)
 	cub->data = (t_data *) malloc(sizeof (t_data));
 	if (!cub->data)
 		its_error("Error malloc");
-	cub->data->movespeed = 1;
-	cub->data->rotspeed = 1;
+	cub->data->movespeed = 0.2;
+	cub->data->rotspeed = 0.2;
 	parsing_file(arv[1], cub);
 	check_map(cub);
 	make_by_lodev(cub->data, cub->player);

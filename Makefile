@@ -3,7 +3,7 @@ NAME 		= cub3D
 SRC 		=	src/cub.c				src/error.c				src/parsing.c\
 				src/parsing_map.c		src/parsing_color.c		src/check_map.c\
 				src/raycasting_start.c	src/raycasting_middle.c	src/raycasting_end.c\
-				src/key_hook.c			src/key_hook_to.c
+				src/key_hook.c			src/key_hook_to.c		src/bonus_mini_map.c
 
 #----------------------------------------------------------------------------
 OBJ 		= $(SRC:.c=.o)

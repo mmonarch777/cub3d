@@ -20,7 +20,7 @@ typedef struct	s_player
 typedef struct	s_img
 {
 	void		*image;
-	int			*date;
+	int			*data;
 	char		*path;
 	int 		pixel_bits;
 	int 		line_bytes;
@@ -37,8 +37,8 @@ typedef struct	s_data
 	double		diry;
 	double		planex;
 	double		planey;
-	int 		movespeed;
-	int 		rotspeed;
+	double		movespeed;
+	double		rotspeed;
 	void		*mlx;
 	void		*win;
 	int 		window[WINHEIGHT][WINWIDTH];
@@ -47,6 +47,7 @@ typedef struct	s_data
 	char		**texture_path;
 	int			color_floor;
 	int			color_ceil;
+	int			zoom;
 	t_img		img;
 }				t_data;
 
@@ -96,5 +97,6 @@ int		key(int key, t_data *data);
 void	turn_right(t_data *data);
 void	turn_left(t_data *data);
 int		close_window(int key);
+void	print_mini_map(t_data *data);
 
 #endif
