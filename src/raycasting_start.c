@@ -1,54 +1,54 @@
 #include "../include/cub3d.h"
 
-void	next_symbol(t_date *date, t_player player)
+void	next_symbol(t_data *data, t_player player)
 {
 	if (player.symbol == 'W')
 	{
-		date->dirx = -1.0;
-		date->diry = 0.0;
-		date->planex = 0.0;
-		date->planey = 0.66;
+		data->dirx = -1.0;
+		data->diry = 0.0;
+		data->planex = 0.0;
+		data->planey = 0.66;
 	}
 }
 
-void	add_vector(t_date *date, t_player player)
+void	add_vector(t_data *data, t_player player)
 {
-	date->posx = (float )player.x + 0.1;
-	date->posy = (float )player.y + 0.1;
+	data->posx = (double )player.x + 0.1;
+	data->posy = (double )player.y + 0.1;
 	if (player.symbol == 'S')
 	{
-		date->dirx = 0.0;
-		date->diry = 1.0;
-		date->planex = -0.66;
-		date->planey = 0.0;
+		data->dirx = 0.0;
+		data->diry = 1.0;
+		data->planex = -0.66;
+		data->planey = 0.0;
 	}
 	else if (player.symbol == 'E')
 	{
-		date->dirx = 1.0;
-		date->diry = 0.0;
-		date->planex = 0.0;
-		date->planey = -0.66;
+		data->dirx = 1.0;
+		data->diry = 0.0;
+		data->planex = 0.0;
+		data->planey = -0.66;
 	}
 	else if (player.symbol == 'N')
 	{
-		date->dirx = 0.0;
-		date->diry = -1.0;
-		date->planex = 0.66;
-		date->planey = 0.0;
+		data->dirx = 0.0;
+		data->diry = -1.0;
+		data->planex = 0.66;
+		data->planey = 0.0;
 	}
 	else
-		next_symbol(date, player);
+		next_symbol(data, player);
 }
 
-void	get_img(t_date *date, int *image, char *path, t_img *img)
+void	get_img(t_data *data, int *image, char *path, t_img *img)
 {
 	int	x;
 	int	y;
 
-	img->image = mlx_xpm_file_to_image(date->mlx, path, &img->width,
+	img->image = mlx_xpm_file_to_image(data->mlx, path, &img->width,
 			&img->height);
 	if (!img->image)
-		its_error("Invalid texture path");
+		its_error("Invalid texture path here");
 	img->pixel_bits = 4;
 	img->line_bytes = img->width;
 	img->endian = 0;
@@ -61,40 +61,44 @@ void	get_img(t_date *date, int *image, char *path, t_img *img)
 		while (++x < img->width)
 			image[img->width * y + x] = img->date[img->width * y + x];
 	}
-	mlx_destroy_image(date->mlx, img->image);
+	mlx_destroy_image(data->mlx, img->image);
 }
 
-void	get_image(t_date *date)
+void	get_image(t_data *data)
 {
 	t_img	img;
 	int 	i;
 
 	i = -1;
 	while (++i < 4)
-		get_img(date, date->texture[0], date->texture_path[0], &img);
+		get_img(data, data->texture[0], data->texture_path[0], &img);
 
 }
 
-int	make_by_lodev(t_date *date, t_player player)
+int	make_by_lodev(t_data *data, t_player player)
 {
 	int	i;
 
-	date->mlx = mlx_init();
-	add_vector(date, player);
-	date->texture = malloc(sizeof (int *) * 8);
-	if (date->texture == NULL)
+	data->mlx = mlx_init();
+	add_vector(data, player);
+	data->texture = malloc(sizeof (int *) * 8);
+	if (data->texture == NULL)
 		its_error("Malloc error");
 	i = -1;
 	while (++i < 4)
 	{
-		date->texture[i] = malloc(sizeof (int ) * (TEXHEIGHT * TEXWIDTH));
-		if (date->texture[i] == NULL)
+		data->texture[i] = malloc(sizeof (int ) * (TEXHEIGHT * TEXWIDTH));
+		if (data->texture[i] == NULL)
 			its_error("Malloc error");
 	}
-	get_image(date);
-	date->win = mlx_new_window(date->mlx, WINWIDTH, WINHEIGHT, "cub3D");
-	date->img.image = mlx_new_image(date->mlx, WINWIDTH, WINHEIGHT);
-	date->img.date = (int *) mlx_get_data_addr(date->img.image,
-			&date->img.pixel_bits, &date->img.line_bytes, &date->img.height);
-	mlx_loop_hook(date->mlx, &raycaster, date);
+	get_image(data);
+	data->win = mlx_new_window(data->mlx, WINWIDTH, WINHEIGHT, "cub3D");
+	data->img.image = mlx_new_image(data->mlx, WINWIDTH, WINHEIGHT);
+	data->img.date = (int *) mlx_get_data_addr(data->img.image,
+			&data->img.pixel_bits, &data->img.line_bytes, &data->img.height);
+	mlx_hook(data->window, 2, 0, key, data);
+	mlx_hook(data->window, 17, 0, close_window, data);
+	mlx_loop_hook(data->mlx, &raycaster, data);
+	mlx_loop(data->mlx);
+	return (0);
 }

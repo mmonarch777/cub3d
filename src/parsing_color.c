@@ -57,9 +57,9 @@ int parsing_color(t_cub *cub, char *line)
 	if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (ft_strncmp(line, "F ", 2) == 0)
-			cub->date->color_floor = get_color(line + 2);
+			cub->data->color_floor = get_color(line + 2);
 		else
-			cub->date->color_ceil = get_color(line + 2);
+			cub->data->color_ceil = get_color(line + 2);
 		return (1);
 	}
 	return (0);

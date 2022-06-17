@@ -64,21 +64,21 @@ void	check_other_bounds(t_cub *cub, char s)
 	int	x;
 
 	y = 1;
-	while (cub->date->map[y + 1])
+	while (cub->data->map[y + 1])
 	{
 		x = 1;
-		if (cub->date->map[y][0] == s)
+		if (cub->data->map[y][0] == s)
 			its_error("Invalid map. Border don't closed");
-		while (cub->date->map[y][x + 1])
+		while (cub->data->map[y][x + 1])
 		{
-			if (cub->date->map[y][x] == s)
+			if (cub->data->map[y][x] == s)
 			{
-				if (check_spase(cub->date->map, y, x, ' '))
+				if (check_spase(cub->data->map, y, x, ' '))
 					its_error("Invalid map. Border don't closed");
 			}
 			x++;
 		}
-		if (cub->date->map[y][x] == s)
+		if (cub->data->map[y][x] == s)
 			its_error("Invalid map. Border don't closed");
 		y++;
 	}
@@ -89,7 +89,7 @@ void	check_map(t_cub *cub)
 	int y;
 
 	y = 0;
-	check_all_symbols(cub, cub->date->map, &y, 0, 0);
-	check_lower_and_upper_bounds(cub->date->map, y - 1);
+	check_all_symbols(cub, cub->data->map, &y, 0, 0);
+	check_lower_and_upper_bounds(cub->data->map, y - 1);
 	check_other_bounds(cub, '0');
 }

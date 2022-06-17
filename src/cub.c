@@ -9,13 +9,13 @@ int	main(int arc, char **arv)
 	cub = (t_cub *)malloc(sizeof (t_cub));
 	if (!cub)
 		its_error("Error malloc");
-	cub->date = (t_date *) malloc(sizeof (t_date));
-	if (!cub->date)
+	cub->data = (t_data *) malloc(sizeof (t_data));
+	if (!cub->data)
 		its_error("Error malloc");
-	cub->date->movespeed = 1;
-	cub->date->rotetion = 1;
+	cub->data->movespeed = 1;
+	cub->data->rotspeed = 1;
 	parsing_file(arv[1], cub);
 	check_map(cub);
-	make_by_lodev(cub->date, cub->player);
+	make_by_lodev(cub->data, cub->player);
 	return (0);
 }

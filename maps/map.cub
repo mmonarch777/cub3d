@@ -1,7 +1,7 @@
-NO ./textures/watM_64.xpm
-SO ./textures/cry_64.xpm
-WE ./textures/watG_64.xpm
-EA ./textures/agreed_64.xpm
+NO ./texture/colorstone.xpm
+SO ./texture/greystone_1.xpm
+WE ./texture/redbrick.xpm
+EA ./texture/wood.xpm
 
 C 110,80,40
 F 100,130,255
