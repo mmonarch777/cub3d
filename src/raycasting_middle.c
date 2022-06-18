@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_middle.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:43:59 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 05:44:02 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	get_side_position(t_raycaster *ray, t_data *data)
@@ -5,7 +17,7 @@ void	get_side_position(t_raycaster *ray, t_data *data)
 	if (ray->raydirx < 0)
 	{
 		ray->stepx = -1;
-		ray->sidedistx =(data->posx - ray->mapx) * ray->deltadistx;
+		ray->sidedistx = (data->posx - ray->mapx) * ray->deltadistx;
 	}
 	else
 	{

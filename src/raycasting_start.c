@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_start.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:44:08 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 06:28:30 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	next_symbol(t_data *data, t_player player)
@@ -48,12 +60,12 @@ void	get_img(t_data *data, int *image, char *path, t_img *img)
 	img->image = mlx_xpm_file_to_image(data->mlx, path, &img->width,
 			&img->height);
 	if (!img->image)
-		its_error("Invalid texture path here");
+		its_error("Invalid texture path");
 	img->pixel_bits = 4;
 	img->line_bytes = img->width;
 	img->endian = 0;
 	img->data = (int *) mlx_get_data_addr(img->image, &img->pixel_bits,
-			 &img->line_bytes, &img->endian);
+			&img->line_bytes, &img->endian);
 	y = -1;
 	while (++y < img->height)
 	{
@@ -67,12 +79,11 @@ void	get_img(t_data *data, int *image, char *path, t_img *img)
 void	get_image(t_data *data)
 {
 	t_img	img;
-	int 	i;
+	int		i;
 
 	i = -1;
 	while (++i < 4)
 		get_img(data, data->texture[i], data->texture_path[i], &img);
-
 }
 
 int	make_by_lodev(t_data *data, t_player player)

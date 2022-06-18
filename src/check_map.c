@@ -1,11 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:41:45 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 06:29:52 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
-void	check_all_symbols(t_cub *cub, char **map, int *y, int x, int player)
+void	check_all_symbols(t_cub *cub, char **map, int *y, int x)
 {
-	while (map[*y])
+	int	player;
+
+	player = 0;
+	while (map[++(*y)])
 	{
-		x = 0;
-		while (map[*y][x])
+		x = -1;
+		while (map[*y][++x])
 		{
 			if (map[*y][x] != 'N' && map[*y][x] != 'E' && map[*y][x] != 'S'
 				&& map[*y][x] != 'W' && map[*y][x] != ' '
@@ -20,9 +35,7 @@ void	check_all_symbols(t_cub *cub, char **map, int *y, int x, int player)
 				map[*y][*y] = '0';
 				player++;
 			}
-			++x;
 		}
-		++(*y);
 	}
 	if (player != 1)
 		its_error("There must be one player on the map");
@@ -46,14 +59,13 @@ void	check_lower_and_upper_bounds(char **mass, int y)
 			its_error("Invalid map. Border don't closed");
 		i++;
 	}
-
 }
 
 int	check_spase(char **map, int y, int x, char s)
 {
 	if (map[y + 1][x] == s || !map[y + 1][x] || map[y - 1][x] == s
-		|| !map[y - 1][x] ||	map[y][x + 1] == s || !map[y][x + 1]
-		||	map[y][x - 1] == s || !map[y][x - 1])
+		|| !map[y - 1][x] || map[y][x + 1] == s || !map[y][x + 1]
+		|| map[y][x - 1] == s || !map[y][x - 1])
 		return (1);
 	return (0);
 }
@@ -86,10 +98,10 @@ void	check_other_bounds(t_cub *cub, char s)
 
 void	check_map(t_cub *cub)
 {
-	int y;
+	int	y;
 
-	y = 0;
-	check_all_symbols(cub, cub->data->map, &y, 0, 0);
+	y = -1;
+	check_all_symbols(cub, cub->data->map, &y, -1);
 	check_lower_and_upper_bounds(cub->data->map, y - 1);
 	check_other_bounds(cub, '0');
 }

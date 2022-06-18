@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_color.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:43:19 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 05:43:21 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 int	mini_putnbr(const char *str, int *i)
@@ -52,7 +64,7 @@ int	get_color(char *line)
 	return (r_g_b);
 }
 
-int parsing_color(t_cub *cub, char *line)
+int	parsing_color(t_cub *cub, char *line)
 {
 	if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 	{

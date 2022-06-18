@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_end.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:43:45 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 05:43:48 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	fill_vertical(t_raycaster *ray, t_data *data, int x)
@@ -25,7 +37,7 @@ void	fill_vertical(t_raycaster *ray, t_data *data, int x)
 
 void	draw_window(t_data *data)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = -1;

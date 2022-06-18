@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:42:46 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 06:37:40 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	step_forward(t_data *data)
@@ -5,8 +17,8 @@ void	step_forward(t_data *data)
 	if (ft_strchr("0", data->map[(int )(data->posy)][(int )(data->posx
 		+ data->dirx * data->movespeed)]))
 		data->posx += data->dirx * data->movespeed;
-	if (ft_strchr("0", data->map[(int )(data->posy + data->diry
-		* data->movespeed)][(int )(data->posx)]))
+	if (ft_strchr("0", data->map[(int )(data->posy
+				+ data->diry * data->movespeed)][(int )(data->posx)]))
 		data->posy += data->diry * data->movespeed;
 }
 
@@ -16,7 +28,7 @@ void	step_back(t_data *data)
 		- data->dirx * data->movespeed)]))
 		data->posx -= data->dirx * data->movespeed;
 	if (ft_strchr("0", data->map[(int )(data->posy - data->diry
-		* data->movespeed)][(int )(data->posx)]))
+				* data->movespeed)][(int )(data->posx)]))
 		data->posy -= data->diry * data->movespeed;
 }
 
@@ -26,7 +38,7 @@ void	step_right(t_data *data)
 		+ data->planex * data->movespeed)]))
 		data->posx += data->planex * data->movespeed;
 	if (ft_strchr("0", data->map[(int )(data->posy + data->planey
-		* data->movespeed)][(int )(data->posx)]))
+				* data->movespeed)][(int )(data->posx)]))
 		data->posy += data->planey * data->movespeed;
 }
 
@@ -36,7 +48,7 @@ void	step_left(t_data *data)
 		- data->planex * data->movespeed)]))
 		data->posx -= data->planex * data->movespeed;
 	if (ft_strchr("0", data->map[(int )(data->posy - data->planey
-		* data->movespeed)][(int )(data->posx)]))
+				* data->movespeed)][(int )(data->posx)]))
 		data->posy -= data->planey * data->movespeed;
 }
 
@@ -55,6 +67,9 @@ int	key(int key, t_data *data)
 	if (key == 124)
 		turn_right(data);
 	if (key == 53)
+	{
+		ft_putendl_fd("EXIT", 2);
 		exit(0);
+	}
 	return (0);
 }

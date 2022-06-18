@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:43:09 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 05:43:11 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 int	parsing_texture(t_cub	*cub, char *line)
@@ -16,7 +28,8 @@ int	parsing_texture(t_cub	*cub, char *line)
 		else
 			num = 3;
 		cub->data->texture_path[num] = ft_strdup(line + 3);
-		if (cub->data->texture_path[num] == NULL || ft_strlen(cub->data->texture_path[num]) == 0)
+		if (cub->data->texture_path[num] == NULL
+			|| ft_strlen(cub->data->texture_path[num]) == 0)
 			its_error("Invalid texture path");
 		return (1);
 	}
@@ -51,11 +64,11 @@ void	parsing_line(t_cub *cub, char *line)
 			while (line[i] == ' ' || line[i] == '\t')
 				i++;
 			if (parsing_texture(cub, line + i))
-				break;
+				break ;
 			else if (parsing_color(cub, line + i))
-				break;
+				break ;
 			else if (add_map(cub, line))
-				break;
+				break ;
 		}
 	}
 }
@@ -64,7 +77,7 @@ void	parsing_file(char *file, t_cub *cub)
 {
 	char	*line;
 	int		fd;
-	int 	ret;
+	int		ret;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)

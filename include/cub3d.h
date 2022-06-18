@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:44:27 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 06:47:58 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "../libmini/libft.h"
@@ -5,33 +17,33 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define	TEXHEIGHT		64
-# define	TEXWIDTH		64
-# define	WINWIDTH		640
-# define	WINHEIGHT		480
+# define TEXHEIGHT		64
+# define TEXWIDTH		64
+# define WINWIDTH		640
+# define WINHEIGHT		480
 
-typedef struct	s_player
+typedef struct s_player
 {
-	int 		x;
-	int 		y;
+	int			x;
+	int			y;
 	char		symbol;
 }				t_player;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*image;
 	int			*data;
 	char		*path;
-	int 		pixel_bits;
-	int 		line_bytes;
-	int 		endian;
-	int 		width;
-	int 		height;
+	int			pixel_bits;
+	int			line_bytes;
+	int			endian;
+	int			width;
+	int			height;
 }				t_img;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	double 		posx;
+	double		posx;
 	double		posy;
 	double		dirx;
 	double		diry;
@@ -41,9 +53,9 @@ typedef struct	s_data
 	double		rotspeed;
 	void		*mlx;
 	void		*win;
-	int 		window[WINHEIGHT][WINWIDTH];
+	int			window[WINHEIGHT][WINWIDTH];
 	char		**map;
-	int 		**texture;
+	int			**texture;
 	char		**texture_path;
 	int			color_floor;
 	int			color_ceil;
@@ -51,7 +63,7 @@ typedef struct	s_data
 	t_img		img;
 }				t_data;
 
-typedef struct	s_raycaster
+typedef struct s_raycaster
 {
 	double		camerx;
 	double		raydirx;
@@ -77,7 +89,7 @@ typedef struct	s_raycaster
 	double		texpos;
 }				t_raycaster;
 
-typedef struct 	s_cub
+typedef struct s_cub
 {
 	t_data		*data;
 	t_player	player;

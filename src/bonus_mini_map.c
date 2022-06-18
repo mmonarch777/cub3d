@@ -1,14 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bonus_mini_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 05:41:33 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/18 06:44:03 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	print(t_data *info, int start_x, int start_y, int color)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = start_y;
-	while (y < start_y + info->zoom) {
+	while (y < start_y + info->zoom)
+	{
 		x = start_x;
-		while (x < start_x + info->zoom) {
+		while (x < start_x + info->zoom)
+		{
 			info->window[y][x] = color;
 			x++;
 		}
@@ -18,10 +32,10 @@ void	print(t_data *info, int start_x, int start_y, int color)
 
 void	print_mini_map(t_data *data)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
-	data->zoom = WINHEIGHT / 60;
+	data->zoom = WINHEIGHT / 90;
 	y = -1;
 	while (data->map[++y] != NULL)
 	{
