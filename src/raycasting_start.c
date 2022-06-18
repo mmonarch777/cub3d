@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:44:08 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/18 10:58:30 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/18 13:14:20 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	make_by_lodev(t_cub *cub, t_data *data, t_player player)
 
 	data->mlx = mlx_init();
 	add_vector(data, player);
-	data->texture = malloc(sizeof (int *) * 8);
+	data->texture = malloc(sizeof (int *) * 4);
 	if (data->texture == NULL)
 		its_error("Malloc error");
 	i = -1;
