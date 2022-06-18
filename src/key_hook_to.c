@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:42:58 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/18 06:42:00 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/18 10:21:20 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,24 @@ void	turn_right(t_data *data)
 		- data->planey * sin(data->rotspeed);
 	data->planey = old_planex * sin(data->rotspeed)
 		+ data->planey * cos(data->rotspeed);
+}
+
+void	make_turn(int key, t_cub *cub)
+{
+	if (cub->player.symbol == 'N' || cub->player.symbol == 'S')
+	{
+		if (key == 123)
+			turn_left(cub->data);
+		if (key == 124)
+			turn_right(cub->data);
+	}
+	else
+	{
+		if (key == 124)
+			turn_left(cub->data);
+		if (key == 123)
+			turn_right(cub->data);
+	}
 }
 
 int	close_window(int key)

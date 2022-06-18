@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:44:27 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/18 06:47:58 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:01:55 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # define TEXHEIGHT		64
 # define TEXWIDTH		64
-# define WINWIDTH		640
-# define WINHEIGHT		480
+# define WINWIDTH		940
+# define WINHEIGHT		680
 
 typedef struct s_player
 {
@@ -101,11 +101,12 @@ void	its_error(char *err);
 void	parsing_map(t_cub *cub, char *line);
 int		parsing_color(t_cub *cub, char *line);
 void	check_map(t_cub *cub);
-int		make_by_lodev(t_data *date, t_player player);
+int		make_by_lodev(t_cub *cub, t_data *date, t_player player);
 int		raycaster(t_data *date);
 void	fill_vertical(t_raycaster *ray, t_data *data, int x);
 void	draw_window(t_data *data);
-int		key(int key, t_data *data);
+int		key(int key, t_cub *cub);
+void	make_turn(int key, t_cub *cub);
 void	turn_right(t_data *data);
 void	turn_left(t_data *data);
 int		close_window(int key);

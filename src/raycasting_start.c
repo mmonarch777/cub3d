@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:44:08 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/18 06:28:30 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/18 10:58:30 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	next_symbol(t_data *data, t_player player)
 
 void	add_vector(t_data *data, t_player player)
 {
-	data->posx = (double )player.x + 0.1;
-	data->posy = (double )player.y + 0.1;
+	data->posx = (double )player.x + 0.5;
+	data->posy = (double )player.y + 0.5;
 	if (player.symbol == 'S')
 	{
 		data->dirx = 0.0;
@@ -86,7 +86,7 @@ void	get_image(t_data *data)
 		get_img(data, data->texture[i], data->texture_path[i], &img);
 }
 
-int	make_by_lodev(t_data *data, t_player player)
+int	make_by_lodev(t_cub *cub, t_data *data, t_player player)
 {
 	int	i;
 
@@ -108,7 +108,7 @@ int	make_by_lodev(t_data *data, t_player player)
 	data->img.data = (int *) mlx_get_data_addr(data->img.image,
 			&data->img.pixel_bits, &data->img.line_bytes, &data->img.height);
 	mlx_loop_hook(data->mlx, &raycaster, data);
-	mlx_hook(data->win, 2, 0, key, data);
+	mlx_hook(cub->data->win, 2, 0, key, cub);
 	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_loop(data->mlx);
 	return (0);

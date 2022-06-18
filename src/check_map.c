@@ -32,7 +32,7 @@ void	check_all_symbols(t_cub *cub, char **map, int *y, int x)
 				cub->player.x = x;
 				cub->player.y = *y;
 				cub->player.symbol = map[*y][x];
-				map[*y][*y] = '0';
+				map[*y][x] = '0';
 				player++;
 			}
 		}

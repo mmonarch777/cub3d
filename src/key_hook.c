@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:42:46 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/18 06:37:40 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/18 10:21:20 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,17 @@ void	step_left(t_data *data)
 		data->posy -= data->planey * data->movespeed;
 }
 
-int	key(int key, t_data *data)
+int	key(int key, t_cub *cub)
 {
 	if (key == 13 || key == 126)
-		step_forward(data);
+		step_forward(cub->data);
 	if (key == 1 || key == 125)
-		step_back(data);
+		step_back(cub->data);
 	if (key == 2)
-		step_right(data);
+		step_right(cub->data);
 	if (key == 0)
-		step_left(data);
-	if (key == 123)
-		turn_left(data);
-	if (key == 124)
-		turn_right(data);
+		step_left(cub->data);
+	make_turn(key, cub);
 	if (key == 53)
 	{
 		ft_putendl_fd("EXIT", 2);

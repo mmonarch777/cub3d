@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:41:33 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/18 06:44:03 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/18 06:46:15 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_mini_map(t_data *data)
 	int	y;
 	int	x;
 
-	data->zoom = WINHEIGHT / 90;
+	data->zoom = WINHEIGHT / 110;
 	y = -1;
 	while (data->map[++y] != NULL)
 	{

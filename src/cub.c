@@ -28,6 +28,6 @@ int	main(int arc, char **arv)
 	cub->data->rotspeed = 0.2;
 	parsing_file(arv[1], cub);
 	check_map(cub);
-	make_by_lodev(cub->data, cub->player);
+	make_by_lodev(cub, cub->data, cub->player);
 	return (0);
 }
